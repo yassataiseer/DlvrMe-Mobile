@@ -1,11 +1,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart';
 import 'package:http/http.dart' as http;
 import 'home_widget.dart';
 import 'main.dart';
-import 'package:latlong/latlong.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'dart:async';
+import 'dart:convert';
 
 class Maps extends StatefulWidget {
   Maps({this.Usrnme});
@@ -49,7 +50,7 @@ class _MapState extends State<Maps> {
   _MapState({this.Usrnme});
   final String Usrnme;
   Future<List<Welcome>> grab_stuff() async{
-    String data = 'http://10.0.0.53:5000/all_order';
+    String data = 'http://10.0.0.94:5000/all_order';
     var response = await http.get(data);
     if (response.statusCode == 200) {
       List FinalData = json.decode(response.body).cast<Map<String, dynamic>>();
@@ -62,6 +63,67 @@ class _MapState extends State<Maps> {
     }else {
       throw Exception('Failed to load data from internet');
     }
+  }
+  GoogleMapController mapController;
+
+  final LatLng _center = const LatLng(45.521563, -122.677433);
+  final Map<String, Marker> _markers = {};
+  List Data = [];
+  Future<void>  _onMapCreated(GoogleMapController controller) async{
+
+    mapController = controller;
+    String data = 'http://10.0.0.94:5000/all_order';
+    var response = await http.get(data);
+    if (response.statusCode == 200) {
+      List FinalData = json.decode(response.body).cast<Map<String, dynamic>>();
+      final List<Welcome> usersList = FinalData.map<Welcome>((json) {
+        return Welcome.fromJson(json);
+      }).toList();
+      //return Post.fromJson(FinalData);
+      Data = usersList;
+    }else {
+      throw Exception('Failed to load data from internet');
+    }
+    setState(() {
+      _markers.clear();
+      for (final data in Data ) {
+        print(data);
+        final marker = Marker(
+          markerId: MarkerId(data.name),
+          position: LatLng(data.latitude, data.longitude),
+
+          onTap: (){
+            showDialog(
+              context: context,
+              builder: (_){
+                return AlertDialog(title: Text
+                  ("Address is:"+data.address+"\n"+"The item is: "+data.item+"\n"+"Price: \$"+data.price.toString()+"\n"+"Product info: "+data.description,),);
+              },
+            );
+          },
+        );
+        _markers[data.name] = marker;
+      }
+    });
+
+  }
+
+List<Marker> allMarkers = [];
+
+  void test(){
+
+    super.initState();
+    allMarkers.add(Marker(
+        markerId: MarkerId("MARKER"),
+        draggable: false,
+        onTap: (){
+          print("stuff");
+        },
+        position: LatLng(45.521563, -122.677433)
+
+    ),
+    );
+
   }
 
 
@@ -86,54 +148,17 @@ class _MapState extends State<Maps> {
            );
          }
 
-         return new FlutterMap(
+         return  GoogleMap(
 
-           options: MapOptions(
-             zoom: 30.0,
+           onMapCreated: _onMapCreated,
+           initialCameraPosition: CameraPosition(
+             target: _center,
+             zoom: 11.0,
            ),
-           children: snapshot.data
-               .map((user) =>
-                FlutterMap(
-        options: MapOptions(
-          zoom: 13.0,
-        ),
+           markers: _markers.values.toSet(),
+         );
 
-        layers: [
-          TileLayerOptions(
-              urlTemplate: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-              subdomains: ['a', 'b', 'c']
-
-          ),
-          MarkerLayerOptions(
-
-            markers: [
-               Marker(
-                width: 80.0,
-                height: 80.0,
-                point: LatLng(user.latitude,user.longitude),
-                builder: (context) =>
-                      IconButton(
-                        icon: Icon(Icons.location_on),
-                        color: Colors.redAccent,
-                        iconSize: 45,
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (_){
-                              return AlertDialog(title: Text
-                                ("Address is:"+user.address+"\n"+"The item is: "+user.item+"\n"+"Price: \$"+user.price.toString()+"\n"+"Product info: "+user.description,),);
-                            },
-                          );
-                        },
-                      ),
-              ),
-            ],
-          ),
-        ],
-         )
-           ).toList(),
-      );
-  },
+       },
 
      ),
 

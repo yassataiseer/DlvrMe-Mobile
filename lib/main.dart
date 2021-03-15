@@ -29,6 +29,7 @@ class LoginPage extends StatelessWidget{
   var nPassword = "";
   Widget build(BuildContext context){
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(title: Text("DlvrMe-Login"),
       ),
       body: Center(
@@ -68,13 +69,13 @@ class LoginPage extends StatelessWidget{
               onPressed: () async {
                 nUsername = etUsername.text;
                 nPassword = etPassword.text;
-                var url = 'http://10.0.0.53:5000/validate_user/'+nUsername+"/"+nPassword;
+                var url = 'http://10.0.0.94:5000/validate_user/'+nUsername+"/"+nPassword;
                 var response = await http.get(url);
                 var x = json.decode((response.body));
 
                 if (x["Status"]==true) {
                   Usrnme = nUsername;
-                  var data = 'http://10.0.0.53:5000/spec_order/'+nUsername;
+                  var data = 'http://10.0.0.94:5000/spec_order/'+nUsername;
                   var response = await http.get(data);
                   var y = json.decode(response.body);
                   print(y);
@@ -120,8 +121,10 @@ class SignUpPage extends StatelessWidget{
   String nUsername = "";
   String nPassword = "";
   Widget build(BuildContext context) {
+
     return Scaffold(
-      appBar: AppBar(title: Text("DlvrMe-SignUp"),),
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(title: Text("DlvrMe-SignUp"),),
       body: Center(
         child: Column(
           children: [
@@ -158,7 +161,7 @@ class SignUpPage extends StatelessWidget{
                   onPressed: ()
                   async {nUsername = etUsername.text;
                   nPassword = etPassword.text;
-                  var url = 'http://10.0.0.53:5000/mk_user/'+nUsername+"/"+nPassword;
+                  var url = 'http://10.0.0.94:5000/mk_user/'+nUsername+"/"+nPassword;
                   print(url);
                   var response = await http.get(url);
                   var x = json.decode((response.body));
