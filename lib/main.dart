@@ -32,6 +32,7 @@ class LoginPage extends StatelessWidget{
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.amber[50],
       appBar: AppBar(title: Text("DlvrMe-Login"),
+          backgroundColor: Color(0xff002366)
       ),
       body: Center(
 
@@ -147,7 +148,9 @@ class SignUpPage extends StatelessWidget{
     return Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: Colors.amber[50],
-        appBar: AppBar(title: Text("DlvrMe-SignUp"),),
+        appBar: AppBar(title: Text("DlvrMe-SignUp"),
+            backgroundColor: Color(0xff002366)
+        ),
       body: Center(
         child: Column(
           children: [

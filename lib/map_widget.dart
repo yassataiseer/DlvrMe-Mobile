@@ -142,8 +142,11 @@ List<Marker> allMarkers = [];
   Widget build(BuildContext context) {
 
     return Scaffold(
+      backgroundColor: Colors.amber[50],
       appBar: AppBar(
-        title: Text('Map View of orders'),
+        title: Text('Map View of orders around the world'),
+          backgroundColor: Color(0xff002366)
+
       ),
      body:
 

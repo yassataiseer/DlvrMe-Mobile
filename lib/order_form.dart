@@ -33,7 +33,9 @@ class _OrderPage extends State<Order>{
       String Price1 = "";
       String Description1 = "";
       return Scaffold(
+        backgroundColor: Colors.amber[50],
         appBar: AppBar(title: Text("DlvrMe Order Form"),
+            backgroundColor: Color(0xff002366)
         ),
         body: SingleChildScrollView(
           child: Column(

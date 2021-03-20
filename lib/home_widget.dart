@@ -78,9 +78,12 @@ class _HomeState extends State<Home> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+        backgroundColor: Colors.amber[50],
+        appBar: AppBar(
         title: Text(Usrnme+"'s Orders"),
-      ),
+            backgroundColor: Color(0xff002366)
+
+        ),
 
       body: FutureBuilder<List<Welcome>>(
         future: grab_stuff(),
@@ -130,7 +133,7 @@ class _HomeState extends State<Home> {
                 MaterialPageRoute(builder: (context) => Order(Usrnme: Usrnme)));
           },
           child: Icon(Icons.add),
-          backgroundColor: Colors.green,
+            backgroundColor: Color(0xff002366)
         ),
 
           bottomNavigationBar: BottomAppBar(
@@ -141,19 +144,33 @@ class _HomeState extends State<Home> {
               FlatButton( onPressed: () {Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Home(Usrnme:Usrnme)));},
-                  color: Colors.yellowAccent,
-                  child: Row(
+                  color:Color(0xff002366),
+
+        child: Row(
                     children:<Widget> [
-                      Icon(Icons.home),Text("Home Page")],
+                      Icon(Icons.home,color: Colors.white,),Text("Home Page",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),)],
                   )
               ),
               FlatButton( onPressed: () {Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Maps(Usrnme:Usrnme)));},
-                  color: Colors.yellowAccent,
+                  color: Color(0xff002366),
                   child: Row(
+
                     children:<Widget> [
-                      Icon(Icons.map),Text("View Map Worldwide")],
+
+                      Icon(Icons.map,
+                        color: Colors.white,
+                      ),Text("View Map Worldwide",
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+
+                    ],
                   )
               ),
             ],
