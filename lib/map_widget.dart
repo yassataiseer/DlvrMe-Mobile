@@ -165,7 +165,6 @@ List<Marker> allMarkers = [];
              zoom: 11.0,
            ),
            markers: _markers.values.toSet(),
-           myLocationEnabled: true,
          );
 
        },

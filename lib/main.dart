@@ -30,11 +30,13 @@ class LoginPage extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.amber[50],
       appBar: AppBar(title: Text("DlvrMe-Login"),
       ),
       body: Center(
-    child: Column(
 
+
+    child: Column(
       children: [
 
         Center(child:Container(
@@ -144,6 +146,7 @@ class SignUpPage extends StatelessWidget{
 
     return Scaffold(
         resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.amber[50],
         appBar: AppBar(title: Text("DlvrMe-SignUp"),),
       body: Center(
         child: Column(
