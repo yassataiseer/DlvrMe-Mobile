@@ -7,6 +7,7 @@ import 'main.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 import 'dart:convert';
+import 'package:location/location.dart';
 
 class Maps extends StatefulWidget {
   Maps({this.Usrnme});
@@ -50,7 +51,7 @@ class _MapState extends State<Maps> {
   _MapState({this.Usrnme});
   final String Usrnme;
   Future<List<Welcome>> grab_stuff() async{
-    String data = 'http://10.0.0.94:5000/all_order';
+    String data = 'http://10.0.0.54:5000/all_order';
     var response = await http.get(data);
     if (response.statusCode == 200) {
       List FinalData = json.decode(response.body).cast<Map<String, dynamic>>();
@@ -65,6 +66,7 @@ class _MapState extends State<Maps> {
     }
   }
   GoogleMapController mapController;
+  Location _location = Location();
 
   final LatLng _center = const LatLng(45.521563, -122.677433);
   final Map<String, Marker> _markers = {};
@@ -72,7 +74,7 @@ class _MapState extends State<Maps> {
   Future<void>  _onMapCreated(GoogleMapController controller) async{
 
     mapController = controller;
-    String data = 'http://10.0.0.94:5000/all_order';
+    String data = 'http://10.0.0.54:5000/all_order';
     var response = await http.get(data);
     if (response.statusCode == 200) {
       List FinalData = json.decode(response.body).cast<Map<String, dynamic>>();
@@ -104,6 +106,13 @@ class _MapState extends State<Maps> {
         );
         _markers[data.name] = marker;
       }
+    });
+    _location.onLocationChanged.listen((l) {
+      controller.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(target: LatLng(l.latitude, l.longitude),zoom: 15),
+        ),
+      );
     });
 
   }
@@ -156,6 +165,7 @@ List<Marker> allMarkers = [];
              zoom: 11.0,
            ),
            markers: _markers.values.toSet(),
+           myLocationEnabled: true,
          );
 
        },

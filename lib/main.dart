@@ -46,9 +46,19 @@ class LoginPage extends StatelessWidget{
             child:TextField(
               controller: etUsername,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                    // width: 0.0 produces a thin "hairline" border
+                      borderRadius: BorderRadius.all(Radius.circular(90.0)),
+                      borderSide: BorderSide(color: Colors.white24)
+                    //borderSide: const BorderSide(),
+                  ),
+                  prefixIcon: Icon(Icons.account_box),
                   labelText: 'Username'
+
               ),
+
+
+
             ))),
 
         Center(child:Container(
@@ -58,7 +68,13 @@ class LoginPage extends StatelessWidget{
               obscureText: true,
               controller: etPassword,
               decoration: InputDecoration(
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(
+                // width: 0.0 produces a thin "hairline" border
+                  borderRadius: BorderRadius.all(Radius.circular(90.0)),
+                  borderSide: BorderSide(color: Colors.white24)
+                //borderSide: const BorderSide(),
+              ),
+                  prefixIcon: Icon(Icons.lock),
                   labelText: 'Password'),
             ))),
         Center(child:Container(
@@ -69,13 +85,13 @@ class LoginPage extends StatelessWidget{
               onPressed: () async {
                 nUsername = etUsername.text;
                 nPassword = etPassword.text;
-                var url = 'http://10.0.0.94:5000/validate_user/'+nUsername+"/"+nPassword;
+                var url = 'http://10.0.0.54:5000/validate_user/'+nUsername+"/"+nPassword;
                 var response = await http.get(url);
                 var x = json.decode((response.body));
 
                 if (x["Status"]==true) {
                   Usrnme = nUsername;
-                  var data = 'http://10.0.0.94:5000/spec_order/'+nUsername;
+                  var data = 'http://10.0.0.54:5000/spec_order/'+nUsername;
                   var response = await http.get(data);
                   var y = json.decode(response.body);
                   print(y);
@@ -93,6 +109,8 @@ class LoginPage extends StatelessWidget{
             style: TextStyle(color: Colors.black, fontSize: 14),
             ),
                 color:Colors.greenAccent,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
         ))),
         Center(child:Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -105,6 +123,8 @@ class LoginPage extends StatelessWidget{
                 style: TextStyle(color: Colors.black, fontSize: 14),
               ),
               color:Colors.blueAccent,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
             ))),
       ],
       ),
@@ -140,7 +160,12 @@ class SignUpPage extends StatelessWidget{
                 child:TextField(
                   controller: etUsername,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                        // width: 0.0 produces a thin "hairline" border
+                          borderRadius: BorderRadius.all(Radius.circular(90.0)),
+                          borderSide: BorderSide(color: Colors.white24)
+                        //borderSide: const BorderSide(),
+                      ),                      prefixIcon: Icon(Icons.account_box),
                       labelText: 'Make a Username'),
                 ))),
 
@@ -151,7 +176,12 @@ class SignUpPage extends StatelessWidget{
                   controller: etPassword,
                   obscureText: true,
                   decoration: InputDecoration(
-                      border: OutlineInputBorder(),
+                      border: OutlineInputBorder(
+                        // width: 0.0 produces a thin "hairline" border
+                          borderRadius: BorderRadius.all(Radius.circular(90.0)),
+                          borderSide: BorderSide(color: Colors.white24)
+                        //borderSide: const BorderSide(),
+                      ),                      prefixIcon: Icon(Icons.lock),
                       labelText: 'Make a Password'),
                 ))),
             Center(child:Container(
@@ -161,7 +191,7 @@ class SignUpPage extends StatelessWidget{
                   onPressed: ()
                   async {nUsername = etUsername.text;
                   nPassword = etPassword.text;
-                  var url = 'http://10.0.0.94:5000/mk_user/'+nUsername+"/"+nPassword;
+                  var url = 'http://10.0.0.54:5000/mk_user/'+nUsername+"/"+nPassword;
                   print(url);
                   var response = await http.get(url);
                   var x = json.decode((response.body));
@@ -180,6 +210,8 @@ class SignUpPage extends StatelessWidget{
                     style: TextStyle(color: Colors.black, fontSize: 14),
                   ),
                   color:Colors.greenAccent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
                 ))),
             Center(child:Container(
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -190,8 +222,11 @@ class SignUpPage extends StatelessWidget{
                       MaterialPageRoute(builder: (context) => LoginPage()));},
                   child: Text('Already a user? Click here!',
                     style: TextStyle(color: Colors.black, fontSize: 14),
+
                   ),
                   color:Colors.blueAccent,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
                 ))),
           ],
         ),
