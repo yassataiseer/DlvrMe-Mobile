@@ -96,19 +96,31 @@ class _HomeState extends State<Home> {
           }
           return ListView(
               children: snapshot.data
-              .map((user) => Card( color: Colors.purple[50],
-                      child: ListTile(
-            title: Text(user.name),
+              .map((user) => Card( color: Colors.amber[50],
+
+
+                  child: ListTile(
+            title: Text(user.name,
+            style: TextStyle(
+              color: Color(0xff002366),
+            ),
+            ),
             onTap: (){ print(user.name); },
 
             subtitle:  Column(
+
               children: <Widget>[
                 Text(
                   "Address is:"+user.address+"\n"+"The item is: "+user.item+"\n"+"Price: \$"+user.price.toString()+"\n"+"Product info: "+user.description,
                   textAlign: TextAlign.justify,
+                  style: TextStyle(
+                    color: Color(0xff002366),
+                  ),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 10,
                 ),
+
+
                 FlatButton(color:Colors.redAccent,child: Text("Delete"), onPressed: () async{
                   var url = 'http://10.0.0.54:5000/del_order/'+user.name+"/"+user.address+"/"+user.item+"/"+user.price.toString()+"/"+user.description;
                   var response = await http.get(url);
@@ -116,7 +128,9 @@ class _HomeState extends State<Home> {
                   setState(() {});
 
                 })
+
               ],
+
             ),
               )),
           )

@@ -8,6 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:location/location.dart';
+import 'dart:math';
 
 class Maps extends StatefulWidget {
   Maps({this.Usrnme});
@@ -72,8 +73,7 @@ class _MapState extends State<Maps> {
   final Map<String, Marker> _markers = {};
   List Data = [];
   Future<void>  _onMapCreated(GoogleMapController controller) async{
-
-    mapController = controller;
+    //mapController = controller;
     String data = 'http://10.0.0.54:5000/all_order';
     var response = await http.get(data);
     if (response.statusCode == 200) {
@@ -86,14 +86,23 @@ class _MapState extends State<Maps> {
     }else {
       throw Exception('Failed to load data from internet');
     }
-    setState(() {
-      _markers.clear();
-      for (final data in Data ) {
-        print(data);
-        final marker = Marker(
-          markerId: MarkerId(data.name),
-          position: LatLng(data.latitude, data.longitude),
 
+
+    _location.onLocationChanged.listen((l) {
+      controller.animateCamera(
+        CameraUpdate.newCameraPosition(
+          CameraPosition(target: LatLng(l.latitude, l.longitude),zoom: 15),
+        ),
+      );
+    });
+    setState(() {
+      //_markers.clear();
+      for (final data in Data ){
+        print("JLNVAdfAFNSVlADNSVlADNSVlADNSV");
+        print(data.address);
+        final marker =  Marker(
+          markerId: MarkerId(data.address),
+          position: LatLng(data.latitude, data.longitude),
           onTap: (){
             showDialog(
               context: context,
@@ -104,38 +113,10 @@ class _MapState extends State<Maps> {
             );
           },
         );
-        _markers[data.name] = marker;
+        _markers[data.address] = marker;
       }
     });
-    _location.onLocationChanged.listen((l) {
-      controller.animateCamera(
-        CameraUpdate.newCameraPosition(
-          CameraPosition(target: LatLng(l.latitude, l.longitude),zoom: 15),
-        ),
-      );
-    });
-
   }
-
-List<Marker> allMarkers = [];
-
-  void test(){
-
-    super.initState();
-    allMarkers.add(Marker(
-        markerId: MarkerId("MARKER"),
-        draggable: false,
-        onTap: (){
-          print("stuff");
-        },
-        position: LatLng(45.521563, -122.677433)
-
-    ),
-    );
-
-  }
-
-
   @override
   int _currentIndex = 0;
   final List<Widget> _children = [];
@@ -148,31 +129,16 @@ List<Marker> allMarkers = [];
           backgroundColor: Color(0xff002366)
 
       ),
-     body:
+     body: GoogleMap(
 
-     FutureBuilder<List<Welcome>>(
-       future: grab_stuff(),
-       builder: (context,snapshot){
-         print('snapshot: $snapshot');
-         if (!snapshot.hasData){
-           return Center(
-               child: CircularProgressIndicator()
-           );
-         }
-
-         return  GoogleMap(
-
-           onMapCreated: _onMapCreated,
-           initialCameraPosition: CameraPosition(
-             target: _center,
-             zoom: 11.0,
-           ),
-           markers: _markers.values.toSet(),
-         );
-
-       },
-
+       onMapCreated: _onMapCreated,
+       initialCameraPosition: CameraPosition(
+         target: _center,
+         zoom: 11.0,
+       ),
+       markers: _markers.values.toSet(),
      ),
+
 
 
       bottomNavigationBar: BottomAppBar(

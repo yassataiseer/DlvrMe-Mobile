@@ -39,7 +39,6 @@ class LoginPage extends StatelessWidget{
 
     child: Column(
       children: [
-
         Center(child:Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
             child: Text('Login',
@@ -47,8 +46,12 @@ class LoginPage extends StatelessWidget{
         Center(child:Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
             child:TextField(
+
               controller: etUsername,
+
               decoration: InputDecoration(
+                  filled: true,
+                  fillColor:Colors.amber[50],
                   border: OutlineInputBorder(
                     // width: 0.0 produces a thin "hairline" border
                       borderRadius: BorderRadius.all(Radius.circular(90.0)),
@@ -57,11 +60,7 @@ class LoginPage extends StatelessWidget{
                   ),
                   prefixIcon: Icon(Icons.account_box),
                   labelText: 'Username'
-
               ),
-
-
-
             ))),
 
         Center(child:Container(
@@ -71,6 +70,8 @@ class LoginPage extends StatelessWidget{
               obscureText: true,
               controller: etPassword,
               decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.amber[50],
                   border: OutlineInputBorder(
                 // width: 0.0 produces a thin "hairline" border
                   borderRadius: BorderRadius.all(Radius.circular(90.0)),
@@ -109,9 +110,9 @@ class LoginPage extends StatelessWidget{
                 }
               },
              child: Text('Login',
-            style: TextStyle(color: Colors.black, fontSize: 14),
+            style: TextStyle(color: Colors.white, fontSize: 14),
             ),
-                color:Colors.greenAccent,
+                color:Color(0xff002366),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
         ))),
@@ -125,7 +126,7 @@ class LoginPage extends StatelessWidget{
               child: Text('New User Sign Up Here!',
                 style: TextStyle(color: Colors.black, fontSize: 14),
               ),
-              color:Colors.blueAccent,
+              color:Colors.amber[50],
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
             ))),
@@ -166,6 +167,8 @@ class SignUpPage extends StatelessWidget{
                 child:TextField(
                   controller: etUsername,
                   decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.amber[50],
                       border: OutlineInputBorder(
                         // width: 0.0 produces a thin "hairline" border
                           borderRadius: BorderRadius.all(Radius.circular(90.0)),
@@ -182,6 +185,8 @@ class SignUpPage extends StatelessWidget{
                   controller: etPassword,
                   obscureText: true,
                   decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.amber[50],
                       border: OutlineInputBorder(
                         // width: 0.0 produces a thin "hairline" border
                           borderRadius: BorderRadius.all(Radius.circular(90.0)),
@@ -213,9 +218,9 @@ class SignUpPage extends StatelessWidget{
                         MaterialPageRoute(builder: (context) => ErrorPage()));
                   }},
                   child: Text('Sign-Up',
-                    style: TextStyle(color: Colors.black, fontSize: 14),
+                    style: TextStyle(color: Colors.white, fontSize: 14),
                   ),
-                  color:Colors.greenAccent,
+                  color:Color(0xff002366),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                 ))),
@@ -230,7 +235,7 @@ class SignUpPage extends StatelessWidget{
                     style: TextStyle(color: Colors.black, fontSize: 14),
 
                   ),
-                  color:Colors.blueAccent,
+                  color:Colors.amber[50],
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10)),
                 ))),
