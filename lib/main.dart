@@ -48,7 +48,6 @@ class LoginPage extends StatelessWidget{
             child:TextField(
 
               controller: etUsername,
-
               decoration: InputDecoration(
                   filled: true,
                   fillColor:Colors.amber[50],

@@ -149,19 +149,28 @@ class _MapState extends State<Maps> {
             FlatButton( onPressed: () {Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => Home(Usrnme:Usrnme)));},
-                color: Colors.yellowAccent,
+                color:  Color(0xff002366),
+
                 child: Row(
                   children:<Widget> [
-                    Icon(Icons.home),Text("Home Page")],
+                    Icon(Icons.home),Text("Home Page",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    )],
                 )
             ),
             FlatButton( onPressed: () {Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => Maps(Usrnme:Usrnme)));},
-                color: Colors.yellowAccent,
+                color:  Color(0xff002366),
                 child: Row(
                   children:<Widget> [
-                    Icon(Icons.map),Text("View Map Worldwide")],
+                    Icon(Icons.map),Text("View Map Worldwide",
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    )],
                 )
             ),
           ],

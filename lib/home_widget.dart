@@ -1,11 +1,9 @@
 import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_app/map_widget.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
-
 import 'main.dart';
 import 'order_form.dart';
 
