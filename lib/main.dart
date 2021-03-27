@@ -28,6 +28,8 @@ class LoginPage extends StatelessWidget{
   var nUsername = "";
   var nPassword = "";
   Widget build(BuildContext context){
+    final _formKey = GlobalKey<FormState>();
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.amber[50],
@@ -59,6 +61,7 @@ class LoginPage extends StatelessWidget{
                   ),
                   prefixIcon: Icon(Icons.account_box),
                   labelText: 'Username'
+
               ),
             ))),
 
@@ -79,6 +82,7 @@ class LoginPage extends StatelessWidget{
               ),
                   prefixIcon: Icon(Icons.lock),
                   labelText: 'Password'),
+
             ))),
         Center(child:Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -88,13 +92,13 @@ class LoginPage extends StatelessWidget{
               onPressed: () async {
                 nUsername = etUsername.text;
                 nPassword = etPassword.text;
-                var url = 'http://10.0.0.54:5000/validate_user/'+nUsername+"/"+nPassword;
+                var url = 'http://10.0.0.63:5000/validate_user/'+nUsername+"/"+nPassword;
                 var response = await http.get(url);
                 var x = json.decode((response.body));
 
                 if (x["Status"]==true) {
                   Usrnme = nUsername;
-                  var data = 'http://10.0.0.54:5000/spec_order/'+nUsername;
+                  var data = 'http://10.0.0.63:5000/spec_order/'+nUsername;
                   var response = await http.get(data);
                   var y = json.decode(response.body);
                   print(y);
@@ -118,6 +122,7 @@ class LoginPage extends StatelessWidget{
         Center(child:Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
             child:
+            // ignore: deprecated_member_use
             RaisedButton(
               onPressed: (){Navigator.push(
                   context,
@@ -201,7 +206,7 @@ class SignUpPage extends StatelessWidget{
                   onPressed: ()
                   async {nUsername = etUsername.text;
                   nPassword = etPassword.text;
-                  var url = 'http://10.0.0.54:5000/mk_user/'+nUsername+"/"+nPassword;
+                  var url = 'http://10.0.0.63:5000/mk_user/'+nUsername+"/"+nPassword;
                   print(url);
                   var response = await http.get(url);
                   var x = json.decode((response.body));
@@ -226,6 +231,7 @@ class SignUpPage extends StatelessWidget{
             Center(child:Container(
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 child:
+                // ignore: deprecated_member_use
                 RaisedButton(
                   onPressed: (){Navigator.push(
                       context,

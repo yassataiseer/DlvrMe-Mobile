@@ -74,7 +74,7 @@ class _MapState extends State<Maps> {
   List Data = [];
   Future<void>  _onMapCreated(GoogleMapController controller) async{
     //mapController = controller;
-    String data = 'http://10.0.0.54:5000/all_order';
+    String data = 'http://10.0.0.63:5000/all_order';
     var response = await http.get(data);
     if (response.statusCode == 200) {
       List FinalData = json.decode(response.body).cast<Map<String, dynamic>>();
@@ -101,14 +101,14 @@ class _MapState extends State<Maps> {
         print("JLNVAdfAFNSVlADNSVlADNSVlADNSV");
         print(data.address);
         final marker =  Marker(
-          markerId: MarkerId(data.address),
+          markerId: MarkerId(data.address+data.name),
           position: LatLng(data.latitude, data.longitude),
           onTap: (){
             showDialog(
               context: context,
               builder: (_){
                 return AlertDialog(title: Text
-                  ("Address is:"+data.address+"\n"+"The item is: "+data.item+"\n"+"Price: \$"+data.price.toString()+"\n"+"Product info: "+data.description,),);
+                  ("The person's name is:"+data.name+"Address is:"+data.address+"\n"+"The item is: "+data.item+"\n"+"Price: \$"+data.price.toString()+"\n"+"Product info: "+data.description,),);
               },
             );
           },

@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
   _HomeState({this.Usrnme});
   final String Usrnme;// receives the value
   Future<List<Welcome>> grab_stuff() async{
-    String data = 'http://10.0.0.54:5000/spec_order/'+widget.Usrnme;
+    String data = 'http://10.0.0.63:5000/spec_order/'+widget.Usrnme;
     var response = await http.get(data);
     if (response.statusCode == 200) {
       List FinalData = json.decode(response.body).cast<Map<String, dynamic>>();
@@ -120,7 +120,7 @@ class _HomeState extends State<Home> {
 
 
                 FlatButton(color:Colors.redAccent,child: Text("Delete"), onPressed: () async{
-                  var url = 'http://10.0.0.54:5000/del_order/'+user.name+"/"+user.address+"/"+user.item+"/"+user.price.toString()+"/"+user.description;
+                  var url = 'http://10.0.0.63:5000/del_order/'+user.name+"/"+user.address+"/"+user.item+"/"+user.price.toString()+"/"+user.description;
                   var response = await http.get(url);
                   var x = json.decode((response.body));
                   setState(() {});

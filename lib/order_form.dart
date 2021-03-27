@@ -88,7 +88,7 @@ class _OrderPage extends State<Order>{
                       Price1 = Price.text ;
                       Price2 = double.parse(Price1);
                       Description1 = Description.text;
-                      var url = 'http://10.0.0.54:5000/mk_order/'+Usrnme+"/"+Address1+"/"+Item1+"/"+Price2.toString()+"/"+Description1;
+                      var url = 'http://10.0.0.63:5000/mk_order/'+Usrnme+"/"+Address1+"/"+Item1+"/"+Price2.toString()+"/"+Description1;
                       print(url);
                       var response = await http.get(url);
                       var x = json.decode((response.body));
