@@ -80,21 +80,49 @@ class _OrderPage extends State<Order>{
               Center(child:Container(
                   padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                   child:
+                  // ignore: deprecated_member_use
                   RaisedButton(
                     onPressed: () async{
-                      double Price2 = 0;
-                      Address1 = Address.text;
-                      Item1 = Item.text;
-                      Price1 = Price.text ;
-                      Price2 = double.parse(Price1);
-                      Description1 = Description.text;
-                      var url = 'http://10.0.0.63:5000/mk_order/'+Usrnme+"/"+Address1+"/"+Item1+"/"+Price2.toString()+"/"+Description1;
-                      print(url);
-                      var response = await http.get(url);
-                      var x = json.decode((response.body));
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomePage(Usrnme: Usrnme)));
+                      var status = await http.get("http://10.0.0.63:5000/validate_address/"+Address.text);
+                      var decodeStatus = json.decode((status.body));
+                      if(decodeStatus["Status"]==true) {
+                        double Price2 = 0;
+                        Address1 = Address.text;
+                        Item1 = Item.text;
+                        Price1 = Price.text;
+                        Price2 = double.parse(Price1);
+                        Description1 = Description.text;
+                        var exist_address = await http.get("http://10.0.0.63:5000/find_address/"+Address1);
+                        var decodedAnswer = json.decode((exist_address.body));
+                        if(decodedAnswer["Status"]==false) {
+                          var url = 'http://10.0.0.63:5000/mk_order/' + Usrnme +
+                              "/" + Address1 + "/" + Item1 + "/" +
+                              Price2.toString() + "/" + Description1;
+                          print(url);
+                          var response = await http.get(url);
+                          var x = json.decode((response.body));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) =>
+                                  HomePage(Usrnme: Usrnme)));
+                        }
+                        else{
+                          showDialog(
+                            context: context,
+                            builder: (_){
+                              return AlertDialog(title: Text("This address is take already by another user"));
+                            },
+                          );
+                        }
+                      }
+                      else if(decodeStatus["Status"]==false){
+                        showDialog(
+                          context: context,
+                          builder: (_){
+                            return AlertDialog(title: Text("This address does not exist please try another...."));
+                          },
+                        );
+                      }
                     },
                     child: Text('Submit Order',
                       style: TextStyle(color: Colors.black, fontSize: 14),
