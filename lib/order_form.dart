@@ -50,7 +50,9 @@ class _OrderPage extends State<Order>{
                     controller: Address,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.location_city),
                         labelText: 'Address to pick up(format:123 fake st city province/state)'),
+
                   ))),
               Center(child:Container(
                   padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -58,6 +60,7 @@ class _OrderPage extends State<Order>{
                     controller: Item,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.add_box),
                         labelText: 'What is the Item?'),
                   ))),
               Center(child:Container(
@@ -66,7 +69,7 @@ class _OrderPage extends State<Order>{
                     controller: Price,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'What is the Price?'),
+                        labelText: 'Price?'),
                     keyboardType: TextInputType.number,
                   ))),
               Center(child:Container(
@@ -75,6 +78,7 @@ class _OrderPage extends State<Order>{
                     controller: Description,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.info),
                         labelText: 'Informating regarding product'),
                   ))),
               Center(child:Container(
