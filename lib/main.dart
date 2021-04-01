@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 
 import 'home_widget.dart';
@@ -33,7 +34,9 @@ class LoginPage extends StatelessWidget{
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.amber[50],
-      appBar: AppBar(title: Text("DlvrMe-Login"),
+      appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text("DlvrMe-Login"),
           backgroundColor: Color(0xff002366)
       ),
       body: Center(
@@ -41,11 +44,15 @@ class LoginPage extends StatelessWidget{
 
     child: Column(
       children: [
+
         Center(child:Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
             child: Text('Login',
                 style: TextStyle(fontSize: 22)))),
-        Center(child:Container(
+
+
+
+    Center(child:Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
             child:TextField(
 
@@ -84,21 +91,27 @@ class LoginPage extends StatelessWidget{
                   labelText: 'Password'),
 
             ))),
+        Center(child:SvgPicture.asset(
+            'assets/images/logo.svg',
+            width: 300,
+            semanticsLabel: 'Acme Logo'
+
+        )
+        ),
         Center(child:Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-
             child:
             RaisedButton(
               onPressed: () async {
                 nUsername = etUsername.text;
                 nPassword = etPassword.text;
-                var url = 'http://10.0.0.63:5000/validate_user/'+nUsername+"/"+nPassword;
+                var url = 'https://dlvrapi.pythonanywhere.com/validate_user/'+nUsername+"/"+nPassword;
                 var response = await http.get(url);
                 var x = json.decode((response.body));
 
                 if (x["Status"]==true) {
                   Usrnme = nUsername;
-                  var data = 'http://10.0.0.63:5000/spec_order/'+nUsername;
+                  var data = 'https://dlvrapi.pythonanywhere.com/spec_order/'+nUsername;
                   var response = await http.get(data);
                   var y = json.decode(response.body);
                   print(y);
@@ -206,7 +219,7 @@ class SignUpPage extends StatelessWidget{
                   onPressed: ()
                   async {nUsername = etUsername.text;
                   nPassword = etPassword.text;
-                  var url = 'http://10.0.0.63:5000/mk_user/'+nUsername+"/"+nPassword;
+                  var url = 'https://dlvrapi.pythonanywhere.com/mk_user/'+nUsername+"/"+nPassword;
                   print(url);
                   var response = await http.get(url);
                   var x = json.decode((response.body));

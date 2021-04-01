@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'main.dart';
 import 'order_form.dart';
+import 'dart:math' as math;
 
 
 class Home extends StatefulWidget {
@@ -53,7 +54,7 @@ class _HomeState extends State<Home> {
   _HomeState({this.Usrnme});
   final String Usrnme;// receives the value
   Future<List<Welcome>> grab_stuff() async{
-    String data = 'http://10.0.0.63:5000/spec_order/'+widget.Usrnme;
+    String data = 'https://dlvrapi.pythonanywhere.com/spec_order/'+widget.Usrnme;
     var response = await http.get(data);
     if (response.statusCode == 200) {
       List FinalData = json.decode(response.body).cast<Map<String, dynamic>>();
@@ -76,10 +77,30 @@ class _HomeState extends State<Home> {
 
   Widget build(BuildContext context) {
     return Scaffold(
+
         backgroundColor: Colors.amber[50],
+
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading:
+            Transform.rotate(
+              angle: 180 * 3.14 / 180,
+              child: IconButton(
+                icon: Icon(
+                  Icons.exit_to_app,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.push(
+
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginPage()));},
+              ),
+            ),
+
         title: Text(Usrnme+"'s Orders"),
-            backgroundColor: Color(0xff002366)
+            backgroundColor: Color(0xff002366),
+
 
         ),
 
@@ -103,7 +124,7 @@ class _HomeState extends State<Home> {
               color: Color(0xff002366),
             ),
             ),
-            onTap: (){ print(user.name); },
+            onTap: null,
 
             subtitle:  Column(
 
@@ -120,7 +141,7 @@ class _HomeState extends State<Home> {
 
 
                 FlatButton(color:Colors.redAccent,child: Text("Delete"), onPressed: () async{
-                  var url = 'http://10.0.0.63:5000/del_order/'+user.name+"/"+user.address+"/"+user.item+"/"+user.price.toString()+"/"+user.description;
+                  var url = 'https://dlvrapi.pythonanywhere.com/del_order/'+user.name+"/"+user.address+"/"+user.item+"/"+user.price.toString()+"/"+user.description;
                   var response = await http.get(url);
                   var x = json.decode((response.body));
                   setState(() {});

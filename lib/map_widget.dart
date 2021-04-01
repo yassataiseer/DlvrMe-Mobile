@@ -52,7 +52,7 @@ class _MapState extends State<Maps> {
   _MapState({this.Usrnme});
   final String Usrnme;
   Future<List<Welcome>> grab_stuff() async{
-    String data = 'http://10.0.0.54:5000/all_order';
+    String data = 'https://dlvrapi.pythonanywhere.com/all_order';
     var response = await http.get(data);
     if (response.statusCode == 200) {
       List FinalData = json.decode(response.body).cast<Map<String, dynamic>>();
@@ -74,7 +74,7 @@ class _MapState extends State<Maps> {
   List Data = [];
   Future<void>  _onMapCreated(GoogleMapController controller) async{
     //mapController = controller;
-    String data = 'http://10.0.0.63:5000/all_order';
+    String data = 'https://dlvrapi.pythonanywhere.com/all_order';
     var response = await http.get(data);
     if (response.statusCode == 200) {
       List FinalData = json.decode(response.body).cast<Map<String, dynamic>>();
@@ -153,7 +153,7 @@ class _MapState extends State<Maps> {
 
                 child: Row(
                   children:<Widget> [
-                    Icon(Icons.home),Text("Home Page",
+                    Icon(Icons.home,color: Colors.white,),Text("Home Page",
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -166,7 +166,7 @@ class _MapState extends State<Maps> {
                 color:  Color(0xff002366),
                 child: Row(
                   children:<Widget> [
-                    Icon(Icons.map),Text("View Map Worldwide",
+                    Icon(Icons.map,color: Colors.white,),Text("View Map Worldwide",
                       style: TextStyle(
                         color: Colors.white,
                       ),

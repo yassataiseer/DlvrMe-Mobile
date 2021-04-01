@@ -69,6 +69,7 @@ class _OrderPage extends State<Order>{
                     controller: Price,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.money),
                         labelText: 'Price?'),
                     keyboardType: TextInputType.number,
                   ))),
@@ -87,7 +88,7 @@ class _OrderPage extends State<Order>{
                   // ignore: deprecated_member_use
                   RaisedButton(
                     onPressed: () async{
-                      var status = await http.get("http://10.0.0.63:5000/validate_address/"+Address.text);
+                      var status = await http.get("https://dlvrapi.pythonanywhere.com/validate_address/"+Address.text);
                       var decodeStatus = json.decode((status.body));
                       if(decodeStatus["Status"]==true) {
                         double Price2 = 0;
@@ -96,7 +97,7 @@ class _OrderPage extends State<Order>{
                         Price1 = Price.text;
                         Price2 = double.parse(Price1);
                         Description1 = Description.text;
-                        var exist_address = await http.get("http://10.0.0.63:5000/find_address/"+Address1);
+                        var exist_address = await http.get("https://dlvrapi.pythonanywhere.com/find_address/"+Address1);
                         var decodedAnswer = json.decode((exist_address.body));
                         if(decodedAnswer["Status"]==false) {
                           var url = 'http://10.0.0.63:5000/mk_order/' + Usrnme +
