@@ -94,10 +94,7 @@ class LoginPage extends StatelessWidget{
         Center(child:SvgPicture.asset(
             'assets/images/logo.svg',
             width: 300,
-            semanticsLabel: 'Acme Logo'
-
-        )
-        ),
+            semanticsLabel: 'Acme Logo')),
         Center(child:Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
             child:
@@ -212,6 +209,10 @@ class SignUpPage extends StatelessWidget{
                       ),                      prefixIcon: Icon(Icons.lock),
                       labelText: 'Make a Password'),
                 ))),
+            Center(child:SvgPicture.asset(
+                'assets/images/logo.svg',
+                width: 300,
+                semanticsLabel: 'Acme Logo')),
             Center(child:Container(
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 child:
