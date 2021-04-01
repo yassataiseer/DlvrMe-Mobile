@@ -277,7 +277,7 @@ class ErrorPage extends StatelessWidget{
           children: [
             Center(child:Container(
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                child: Text('Invalid creds or The username you want to be signed up with is take',
+                child: Text('Invalid creds or The username you want to be signed up with is taken',
                     style: TextStyle(fontSize: 22)))),
           ],
         ),
