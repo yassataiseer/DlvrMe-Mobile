@@ -48,6 +48,26 @@ class Welcome {
         price: json["Price"]);
   }
 }
+
+class user_data{
+  double latitude;
+  double longitude;
+  user_data({
+    this.latitude,
+    this.longitude,
+  });
+  factory user_data.fromDouble( double) {
+    return user_data(
+      latitude: double["Latitude"].toDouble(),
+      longitude: double["Longitude"].toDouble(),
+);
+  }
+}
+
+
+
+
+
 class _MapState extends State<Maps> {
   _MapState({this.Usrnme});
   final String Usrnme;
@@ -66,15 +86,34 @@ class _MapState extends State<Maps> {
       throw Exception('Failed to load data from internet');
     }
   }
+  LatLng _center =  LatLng(45.521563, -122.677433);
   GoogleMapController mapController;
   Location _location = Location();
-
-  final LatLng _center = const LatLng(45.521563, -122.677433);
+  Future<List<user_data>> _getLocation() async {
+    var location = new Location();
+    try {
+      await location.getLocation().then((onValue) {
+        List data;
+        double lat = onValue.latitude.toDouble();
+        double lon = onValue.longitude.toDouble();
+        data[0] = lat;
+        data[1] = lon;
+        print(onValue.latitude.toDouble() + onValue.longitude.toDouble());
+        LatLng _center = LatLng(lat,lon);
+        List<user_data> realData = data.map<user_data>((realData){return user_data.fromDouble(realData);});
+        return realData.toList();
+        //return _center;
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
   final Map<String, Marker> _markers = {};
   List Data = [];
   Future<void>  _onMapCreated(GoogleMapController controller) async{
     //mapController = controller;
     String data = 'https://dlvrapi.pythonanywhere.com/all_order';
+    int increment = 0;
     var response = await http.get(data);
     if (response.statusCode == 200) {
       List FinalData = json.decode(response.body).cast<Map<String, dynamic>>();
@@ -89,11 +128,16 @@ class _MapState extends State<Maps> {
 
 
     _location.onLocationChanged.listen((l) {
-      controller.animateCamera(
-        CameraUpdate.newCameraPosition(
+      if(increment>0){
+        //continue;
+      }
+      else{
+        increment++;
+        controller.animateCamera(
+          CameraUpdate.newCameraPosition(
           CameraPosition(target: LatLng(l.latitude, l.longitude),zoom: 15),
         ),
-      );
+      );}
     });
     setState(() {
       //_markers.clear();
@@ -120,6 +164,7 @@ class _MapState extends State<Maps> {
   @override
   int _currentIndex = 0;
   final List<Widget> _children = [];
+
   Widget build(BuildContext context) {
 
     return Scaffold(
@@ -135,8 +180,11 @@ class _MapState extends State<Maps> {
        initialCameraPosition: CameraPosition(
          target: _center,
          zoom: 11.0,
+
        ),
        markers: _markers.values.toSet(),
+       myLocationEnabled: true,
+
      ),
 
 

@@ -100,7 +100,7 @@ class _OrderPage extends State<Order>{
                         var exist_address = await http.get("https://dlvrapi.pythonanywhere.com/find_address/"+Address1);
                         var decodedAnswer = json.decode((exist_address.body));
                         if(decodedAnswer["Status"]==false) {
-                          var url = 'http://10.0.0.63:5000/mk_order/' + Usrnme +
+                          var url = 'https://dlvrapi.pythonanywhere.com/mk_order/' + Usrnme +
                               "/" + Address1 + "/" + Item1 + "/" +
                               Price2.toString() + "/" + Description1;
                           print(url);
@@ -130,9 +130,9 @@ class _OrderPage extends State<Order>{
                       }
                     },
                     child: Text('Submit Order',
-                      style: TextStyle(color: Colors.black, fontSize: 14),
+                      style: TextStyle(color: Colors.white, fontSize: 14),
                     ),
-                    color:Colors.blueAccent,
+                    color: Color(0xff002366),
                   )))
             ],
           ),

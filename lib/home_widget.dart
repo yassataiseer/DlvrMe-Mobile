@@ -142,6 +142,7 @@ class _HomeState extends State<Home> {
 
                 FlatButton(color:Colors.redAccent,child: Text("Delete"), onPressed: () async{
                   var url = 'https://dlvrapi.pythonanywhere.com/del_order/'+user.name+"/"+user.address+"/"+user.item+"/"+user.price.toString()+"/"+user.description;
+
                   var response = await http.get(url);
                   var x = json.decode((response.body));
                   setState(() {});

@@ -10,6 +10,7 @@ void main() {
   runApp(MyApp());
   TextEditingController etUsername = new TextEditingController();
   TextEditingController etPassword = new TextEditingController();
+  TextEditingController etScndPassword = new TextEditingController();
 }
 class MyApp extends StatelessWidget {
   @override
@@ -26,6 +27,7 @@ class LoginPage extends StatelessWidget{
   @override
   TextEditingController etUsername = new TextEditingController();
   TextEditingController etPassword = new TextEditingController();
+  TextEditingController etScndPassword = new TextEditingController();
   var nUsername = "";
   var nPassword = "";
   Widget build(BuildContext context){
@@ -91,10 +93,7 @@ class LoginPage extends StatelessWidget{
                   labelText: 'Password'),
 
             ))),
-        Center(child:SvgPicture.asset(
-            'assets/images/logo.svg',
-            width: 300,
-            semanticsLabel: 'Acme Logo')),
+
         Center(child:Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
             child:
@@ -156,8 +155,10 @@ class SignUpPage extends StatelessWidget{
   @override
   TextEditingController etUsername = new TextEditingController();
   TextEditingController etPassword = new TextEditingController();
+  TextEditingController etScndPassword = new TextEditingController();
   String nUsername = "";
   String nPassword = "";
+  String nScndPassword = "";
   Widget build(BuildContext context) {
 
     return Scaffold(
@@ -209,17 +210,37 @@ class SignUpPage extends StatelessWidget{
                       ),                      prefixIcon: Icon(Icons.lock),
                       labelText: 'Make a Password'),
                 ))),
-            Center(child:SvgPicture.asset(
-                'assets/images/logo.svg',
-                width: 300,
-                semanticsLabel: 'Acme Logo')),
+            Center(child:Container(
+                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                child:
+                TextField(
+                  controller: etScndPassword,
+                  obscureText: true,
+                  decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.amber[50],
+                      border: OutlineInputBorder(
+                        // width: 0.0 produces a thin "hairline" border
+                          borderRadius: BorderRadius.all(Radius.circular(90.0)),
+                          borderSide: BorderSide(color: Colors.white24)
+                        //borderSide: const BorderSide(),
+                      ),                      prefixIcon: Icon(Icons.lock),
+                      labelText: 'Confirm Password'),
+                ))),
+
+
             Center(child:Container(
                 padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                 child:
                 RaisedButton(
                   onPressed: ()
-                  async {nUsername = etUsername.text;
+
+
+                  async {
+                  nUsername = etUsername.text;
                   nPassword = etPassword.text;
+                  nScndPassword = etScndPassword.text;
+                  if (nScndPassword==nPassword){
                   var url = 'https://dlvrapi.pythonanywhere.com/mk_user/'+nUsername+"/"+nPassword;
                   print(url);
                   var response = await http.get(url);
@@ -230,11 +251,20 @@ class SignUpPage extends StatelessWidget{
                         context,
                         MaterialPageRoute(builder: (context) => HomePage(Usrnme: Usrnme)));
                   }
+                  else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ErrorPage()));
+                  }
+                  }
                   else{
                     Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) => ErrorPage()));
-                  }},
+                  }
+                  },
+
+
                   child: Text('Sign-Up',
                     style: TextStyle(color: Colors.white, fontSize: 14),
                   ),
@@ -252,7 +282,6 @@ class SignUpPage extends StatelessWidget{
                       MaterialPageRoute(builder: (context) => LoginPage()));},
                   child: Text('Already a user? Click here!',
                     style: TextStyle(color: Colors.black, fontSize: 14),
-
                   ),
                   color:Colors.amber[50],
                   shape: RoundedRectangleBorder(
