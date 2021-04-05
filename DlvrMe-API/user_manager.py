@@ -3,28 +3,38 @@ import os
 
 from decouple import config
 
-db =mysql.connector.connect(
-    host = "localhost",
-    user = "root",
-    passwd = "new_password",
-    database = "dlvrme"
-)
-mycursor = db.cursor()
+
 
 
 class user:
     def add_user(username,password):
+        db =mysql.connector.connect(
+        host = "localhost",
+        user = "root",
+        passwd = "new_password",
+        database = "dlvrme")
+        mycursor = db.cursor()
         boolean = user.check_if_user_exists(username)
         if boolean == True:
             return {"Status" : False}
         mycursor.execute("INSERT INTO user (Username,Password) VALUES (%s,%s)",(username,password))
         db.commit()
+        mycursor.close()
+        db.close()
         return {"Status" : True}
 
 
     def check_user(user,password):
+        db =mysql.connector.connect(
+        host = "localhost",
+        user = "root",
+        passwd = "new_password",
+        database = "dlvrme")
+        mycursor = db.cursor()
         mycursor.execute("SELECT Username FROM user WHERE Username = (%s) AND Password = (%s) ",(user,password))
         data = mycursor.fetchall()
+        mycursor.close()
+        db.close()
         if len(data)==0:
             return {"Status" : False}
         else:
@@ -32,8 +42,16 @@ class user:
 
         
     def check_if_user_exists(user):
+        db =mysql.connector.connect(
+        host = "localhost",
+        user = "root",
+        passwd = "new_password",
+        database = "dlvrme")
+        mycursor = db.cursor()
         mycursor.execute("SELECT Username FROM user WHERE Username = (%s) ",(user,))
         data = mycursor.fetchall()
+        mycursor.close()
+        db.close
         if len(data)==0:
             return  False
         else:
