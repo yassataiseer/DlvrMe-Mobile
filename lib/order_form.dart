@@ -23,6 +23,7 @@ class _OrderPage extends State<Order>{
   _OrderPage({this.Usrnme});
   final String Usrnme;// receives the value
   TextEditingController Address = new TextEditingController();
+  TextEditingController CityProv = new TextEditingController();
   TextEditingController Item = new TextEditingController();
   TextEditingController Price = new TextEditingController();
   TextEditingController Description = new TextEditingController();
@@ -51,9 +52,20 @@ class _OrderPage extends State<Order>{
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.location_city),
-                        labelText: 'Address to pick up(format:123 fake st city province/state)'),
+                        labelText: 'Address to pick up'),
 
                   ))),
+              Center(child:Container(
+                  padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+                  child:TextField(
+                    controller: CityProv,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        prefixIcon: Icon(Icons.add_location),
+                        labelText: 'City And Province/State'),
+
+                  ))),
+
               Center(child:Container(
                   padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
                   child:TextField(
@@ -88,11 +100,13 @@ class _OrderPage extends State<Order>{
                   // ignore: deprecated_member_use
                   RaisedButton(
                     onPressed: () async{
-                      var status = await http.get("https://dlvrapi.pythonanywhere.com/validate_address/"+Address.text);
+                      Address1 = Address.text;
+                      var cityprov = CityProv.text;
+                      Address1 = Address1+" "+cityprov;
+                      var status = await http.get("https://dlvrapi.pythonanywhere.com/validate_address/"+Address1);
                       var decodeStatus = json.decode((status.body));
                       if(decodeStatus["Status"]==true) {
                         double Price2 = 0;
-                        Address1 = Address.text;
                         Item1 = Item.text;
                         Price1 = Price.text;
                         Price2 = double.parse(Price1);

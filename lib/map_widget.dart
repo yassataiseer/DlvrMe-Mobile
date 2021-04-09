@@ -151,8 +151,40 @@ class _MapState extends State<Maps> {
             showDialog(
               context: context,
               builder: (_){
-                return AlertDialog(title: Text
-                  ("The person's name is:"+data.name+"Address is:"+data.address+"\n"+"The item is: "+data.item+"\n"+"Price: \$"+data.price.toString()+"\n"+"Product info: "+data.description,),);
+                return AlertDialog(
+                    contentPadding: EdgeInsets.only(left: 25, right: 25),
+                title: Center(child: Text("Dlvr Information")),
+                shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0))),
+                content: Container(
+                height: 200,
+                width: 300,
+                child: SingleChildScrollView(
+                child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                SizedBox(
+                height: 20,
+                ),
+                Text(
+                    "The person's name is:"+ data.name,
+                ),
+                Text(
+                  "Address is:"+data.address,
+                ),
+                Text(
+                  "The item is: "+data.item,
+                ),
+                Text(
+                  "Price: \$"+data.price.toString(),
+                ),
+                  Text(
+                    "Product info: "+data.description,
+                  ),
+                ],
+                ),
+                ),
+                ),);
               },
             );
           },
