@@ -5,13 +5,15 @@ import requests, json
 
 
 class order:
-
-    def delete_order(Username,Address,Item,Price,User_Info):
+    def connect():
         db =mysql.connector.connect(
         host = "localhost",
         user = "root",
         passwd = "new_password",
         database = "dlvrme")
+        return db
+    def delete_order(Username,Address,Item,Price,User_Info):
+        db = order.connect()
         mycursor = db.cursor()
         Price1 = float(Price)
         mycursor.execute("DELETE FROM deliveries WHERE Username = %s AND Address = %s AND Item = %s AND Price = %s AND User_Info = %s",(Username,Address,Item,Price1,User_Info))
@@ -20,11 +22,7 @@ class order:
         db.close()
         return {"Status":True}
     def add_order(Username,Address,Item,Price,User_Info):
-        db =mysql.connector.connect(
-        host = "localhost",
-        user = "root",
-        passwd = "new_password",
-        database = "dlvrme")
+        db = order.connect()
         mycursor = db.cursor()
         try:
             url = 'http://photon.komoot.de/api/?q='
@@ -46,11 +44,7 @@ class order:
     def edit_order(Username,Address,Item,Price,User_Info):
         pass
     def get_order():
-        db =mysql.connector.connect(
-        host = "localhost",
-        user = "root",
-        passwd = "new_password",
-        database = "dlvrme")
+        db = order.connect()
         mycursor = db.cursor()
         data = ["Name","Address","Latitude","Longitude","Item","Price","Description"]
         mycursor.execute('SELECT * FROM deliveries')
@@ -63,11 +57,7 @@ class order:
         db.close()
         return data1
     def get_order_specific_person(username):
-        db =mysql.connector.connect(
-        host = "localhost",
-        user = "root",
-        passwd = "new_password",
-        database = "dlvrme")
+        db = order.connect()
         mycursor = db.cursor()
         data = ["Name","Address","Latitude","Longitude","Item","Price","Description"]
         mycursor.execute("SELECT * FROM deliveries WHERE Username = %s",(username,))
@@ -80,11 +70,7 @@ class order:
         db.close()
         return final
     def grab_address(Address):
-        db =mysql.connector.connect(
-        host = "localhost",
-        user = "root",
-        passwd = "new_password",
-        database = "dlvrme")
+        db = order.connect()
         mycursor = db.cursor()
         mycursor.execute("SELECT * FROM deliveries WHERE Address = %s",(Address,))
         data = mycursor.fetchall()
@@ -103,7 +89,7 @@ class order:
             return {"Status":True}
         except IndexError:
             return {"Status":False}
-    
+
 
 #print(order.validate_address("452 Savoline Blvd Milton Ontario"))
 #print(order.get_order_specific_person('Eshal Taiseer'))
