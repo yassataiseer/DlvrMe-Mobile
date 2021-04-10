@@ -14,9 +14,11 @@
     <application
         android:name="io.flutter.app.FlutterApplication"
         android:label="flutter_app"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDNgC--pVBR5nJqGuoSEMf6PTcMjlWlats"/>
+
 
         <activity
             android:name=".MainActivity"

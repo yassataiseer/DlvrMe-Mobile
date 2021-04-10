@@ -7,12 +7,15 @@ from decouple import config
 
 
 class user:
-    def add_user(username,password):
+    def connect():
         db =mysql.connector.connect(
         host = "localhost",
         user = "root",
         passwd = "new_password",
         database = "dlvrme")
+        return db
+    def add_user(username,password):
+        db = user.connect()
         mycursor = db.cursor()
         boolean = user.check_if_user_exists(username)
         if boolean == True:
@@ -25,11 +28,7 @@ class user:
 
 
     def check_user(user,password):
-        db =mysql.connector.connect(
-        host = "localhost",
-        user = "root",
-        passwd = "new_password",
-        database = "dlvrme")
+        db = user.connect()
         mycursor = db.cursor()
         mycursor.execute("SELECT Username FROM user WHERE Username = (%s) AND Password = (%s) ",(user,password))
         data = mycursor.fetchall()
@@ -40,13 +39,9 @@ class user:
         else:
             return {"Status" : True}
 
-        
+
     def check_if_user_exists(user):
-        db =mysql.connector.connect(
-        host = "localhost",
-        user = "root",
-        passwd = "new_password",
-        database = "dlvrme")
+        db = user.connect()
         mycursor = db.cursor()
         mycursor.execute("SELECT Username FROM user WHERE Username = (%s) ",(user,))
         data = mycursor.fetchall()
