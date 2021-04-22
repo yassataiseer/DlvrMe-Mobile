@@ -54,3 +54,9 @@ The user's table will look like this:
 | Item | VARCHAR |
 | Price | FLOAT |
 | User_info | VARCHAR |
+
+
+### Open Sourcing Opportunities
+Read ```CODE_OF_CONDUCT.md``` for proper rules
+Instructions will come soon regarding what needs
+to be improved.
