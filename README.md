@@ -62,3 +62,6 @@ The user's table will look like this:
 Read ```CODE_OF_CONDUCT.md``` for proper rules
 Instructions will come soon regarding what needs
 to be improved.
+Things to be done can be viewed at  ```CONTRIBUTING.md``` but do notify what
+you will be doing before hand to prevent overwritten code.
+Current DlvrMe is not making new features rather improving current features.
