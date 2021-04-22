@@ -16,7 +16,11 @@ DlvrMe-Mobile is a project made by Yassa Taiseer that is used to make delivering
   - Flask(backend)
   - MySQL(Backend)
   - Flutter(Frontend)
-
+|Library/Framework| Purpose  |
+| ------ | ------ |
+| Flask | Backend Api |
+| MySQL | Database |
+| Flutter| Frontend UI |
 
 
 ### Installation
