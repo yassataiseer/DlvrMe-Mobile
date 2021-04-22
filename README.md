@@ -13,10 +13,6 @@ DlvrMe-Mobile is a project made by Yassa Taiseer that is used to make delivering
   - The Api code can also be found here: https://github.com/yassataiseer/DlvrMe-API
 
 ### Tech Stack:
-  - Flask(backend)
-  - MySQL(Backend)
-  - Flutter(Frontend)
-
 |Library/Framework| Purpose |
 | ------ | ------ |
 | Flask | Backend Api |
