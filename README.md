@@ -10,7 +10,11 @@ DlvrMe-Mobile is a project made by Yassa Taiseer that is used to make delivering
   - This is a cross platform project available to both mac and ios
   - The flutter app goes to a rest Api made with Python and Flask
   - ```DlvrMe-Api```is the folder for the Api
-  - The Api code can also be found here: https://github.com/yassataiseer/DlvrMe-API
+
+### Backend related affairs:
+The backend code can be found here: https://github.com/yassataiseer/DlvrMe-API
+Instructions regarding its setup can be found there
+
 
 ### Tech Stack:
 |Library/Framework| Purpose |
