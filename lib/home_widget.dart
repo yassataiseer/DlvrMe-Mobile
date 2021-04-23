@@ -171,6 +171,7 @@ class _HomeState extends State<Home> {
         ),
 
           bottomNavigationBar: BottomAppBar(
+            color:Color(0xff002366),
           child: new Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -182,7 +183,7 @@ class _HomeState extends State<Home> {
 
         child: Row(
                     children:<Widget> [
-                      Icon(Icons.home,color: Colors.white,),Text("Home Page",
+                      Icon(Icons.home,color: Colors.white,),Text("Home",
                         style: TextStyle(
                           color: Colors.white,
                         ),)],
@@ -198,7 +199,7 @@ class _HomeState extends State<Home> {
 
                       Icon(Icons.map,
                         color: Colors.white,
-                      ),Text("View Map Worldwide",
+                      ),Text("View Map",
                         style: TextStyle(
                           color: Colors.white,
                         ),
