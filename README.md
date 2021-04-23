@@ -6,7 +6,6 @@ DlvrMe-Mobile is a project made by Yassa Taiseer that is used to make delivering
   - This is currently an open source project
   - They can then post an order worldwide and another user can drop it off somewhere else
   - Basically uber eats but anyone can deliver and make money
-  - This Project has also been made on the web, view here: https://github.com/yassataiseer/delivrme
   - This is a cross platform project available to both mac and ios
   - The flutter app goes to a rest Api made with Python and Flask
   - ```DlvrMe-Api```is the folder for the Api
