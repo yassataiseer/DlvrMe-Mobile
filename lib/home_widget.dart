@@ -160,15 +160,7 @@ class _HomeState extends State<Home> {
           );
         }
       ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Order(Usrnme: Usrnme)));
-          },
-          child: Icon(Icons.add),
-            backgroundColor: Color(0xff002366)
-        ),
+
 
           bottomNavigationBar: BottomAppBar(
             color:Color(0xff002366),
@@ -189,6 +181,7 @@ class _HomeState extends State<Home> {
                         ),)],
                   )
               ),
+
               FlatButton( onPressed: () {Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Maps(Usrnme:Usrnme)));},
@@ -210,9 +203,21 @@ class _HomeState extends State<Home> {
               ),
             ],
           ),
-        )
+        ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Order(Usrnme: Usrnme)));
+          },
+          tooltip: 'Make a new order',
+          child: Icon(Icons.add),
+          backgroundColor: Color(0xff002366)
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
-      );
+    );
+
   }
 }
 

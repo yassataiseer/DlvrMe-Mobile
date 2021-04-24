@@ -10,6 +10,8 @@ import 'dart:convert';
 import 'package:location/location.dart';
 import 'dart:math';
 
+import 'order_form.dart';
+
 class Maps extends StatefulWidget {
   Maps({this.Usrnme});
   final String Usrnme; // receives the value
@@ -202,7 +204,7 @@ class _MapState extends State<Maps> {
     return Scaffold(
       backgroundColor: Colors.amber[50],
       appBar: AppBar(
-        title: Text('Map View of orders around the world'),
+        title: Text('Orders Around The World'),
           backgroundColor: Color(0xff002366)
 
       ),
@@ -222,6 +224,7 @@ class _MapState extends State<Maps> {
 
 
       bottomNavigationBar: BottomAppBar(
+        color:Color(0xff002366),
         child:  Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -233,7 +236,7 @@ class _MapState extends State<Maps> {
 
                 child: Row(
                   children:<Widget> [
-                    Icon(Icons.home,color: Colors.white,),Text("Home Page",
+                    Icon(Icons.home,color: Colors.white,),Text("Home",
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -246,7 +249,7 @@ class _MapState extends State<Maps> {
                 color:  Color(0xff002366),
                 child: Row(
                   children:<Widget> [
-                    Icon(Icons.map,color: Colors.white,),Text("View Map Worldwide",
+                    Icon(Icons.map,color: Colors.white,),Text("View Map",
                       style: TextStyle(
                         color: Colors.white,
                       ),
@@ -256,6 +259,17 @@ class _MapState extends State<Maps> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Order(Usrnme: Usrnme)));
+          },
+          tooltip: 'Make a new order',
+          child: Icon(Icons.add),
+          backgroundColor: Color(0xff002366)
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
   void onTabTapped(int index) {
