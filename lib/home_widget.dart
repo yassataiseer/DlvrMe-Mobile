@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/map_widget.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_auth/http_auth.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'main.dart';
@@ -54,8 +55,9 @@ class _HomeState extends State<Home> {
   _HomeState({this.Usrnme});
   final String Usrnme;// receives the value
   Future<List<Welcome>> grab_stuff() async{
-    String data = 'https://dlvrapi.pythonanywhere.com/spec_order/'+widget.Usrnme;
-    var response = await http.get(data);
+    var client = BasicAuthClient('Yassa Taiseer', 'yassa123');
+    String data = 'https://dlvrapi.pythonanywhere.com/Orders/spec_order/'+widget.Usrnme;
+    var response = await client.get(data);
     if (response.statusCode == 200) {
       List FinalData = json.decode(response.body).cast<Map<String, dynamic>>();
       List<Welcome> usersList = FinalData.map<Welcome>((json) {
@@ -141,10 +143,11 @@ class _HomeState extends State<Home> {
 
 
                 FlatButton(color:Colors.redAccent,child: Text("Delete"), onPressed: () async{
-                  var url = 'https://dlvrapi.pythonanywhere.com/del_order/'+user.name+"/"+user.address+"/"+user.item+"/"+user.price.toString()+"/"+user.description;
-
-                  var response = await http.get(url);
+                  var client = BasicAuthClient('Yassa Taiseer', 'yassa123');
+                  var url = 'https://dlvrapi.pythonanywhere.com/Orders/del_order/'+user.name+"/"+user.address+"/"+user.item+"/"+user.price.toString()+"/"+user.description;
+                  var response = await client.get(url);
                   var x = json.decode((response.body));
+                  print(x);
                   setState(() {});
 
                 })

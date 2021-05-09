@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
+import 'package:http_auth/http_auth.dart';
 
 import 'home_widget.dart';
 
@@ -101,14 +102,16 @@ class LoginPage extends StatelessWidget{
               onPressed: () async {
                 nUsername = etUsername.text;
                 nPassword = etPassword.text;
-                var url = 'https://dlvrapi.pythonanywhere.com/validate_user/'+nUsername+"/"+nPassword;
-                var response = await http.get(url);
-                var x = json.decode((response.body));
 
+
+                var url = 'https://dlvrapi.pythonanywhere.com/Users/validate_user/'+nUsername+"/"+nPassword;
+                var client = BasicAuthClient('Yassa Taiseer', 'yassa123');
+                var response = await client.get(url);
+                var x = json.decode((response.body));
                 if (x["Status"]==true) {
                   Usrnme = nUsername;
-                  var data = 'https://dlvrapi.pythonanywhere.com/spec_order/'+nUsername;
-                  var response = await http.get(data);
+                  var data = 'https://dlvrapi.pythonanywhere.com/Orders/spec_order/'+nUsername;
+                  var response = await client.get(data);
                   var y = json.decode(response.body);
                   print(y);
                   Navigator.push(
@@ -240,10 +243,11 @@ class SignUpPage extends StatelessWidget{
                   nUsername = etUsername.text;
                   nPassword = etPassword.text;
                   nScndPassword = etScndPassword.text;
+                  var client = BasicAuthClient('Yassa Taiseer', 'yassa123');
                   if (nScndPassword==nPassword){
-                  var url = 'https://dlvrapi.pythonanywhere.com/mk_user/'+nUsername+"/"+nPassword;
+                  var url = 'https://dlvrapi.pythonanywhere.com/Users/mk_user/'+nUsername+"/"+nPassword;
                   print(url);
-                  var response = await http.get(url);
+                  var response = await client.get(url);
                   var x = json.decode((response.body));
                   if (x["Status"]==true) {
                     Usrnme = nUsername;
