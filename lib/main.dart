@@ -303,18 +303,29 @@ class ErrorPage extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title: Text("DlvrMe-Login"),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            Center(child:Container(
-                padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                child: Text('Invalid creds or The username you want to be signed up with is taken',
-                    style: TextStyle(fontSize: 22)))),
-          ],
+      backgroundColor: Colors.amber[50],
+      appBar: AppBar(
+            automaticallyImplyLeading: true,
+            title: Text("Error Page"),
+            backgroundColor: Color(0xff002366)
         ),
-      ),
+      body: RichText(
+    text: new TextSpan(
+      // Note: Styles for TextSpans must be explicitly defined.
+      // Child text spans will inherit styles from parent
+      style: new TextStyle(
+      fontSize: 14.0,
+      color: Colors.black,
+    ),
+    children: <TextSpan>[
+    new TextSpan(text: 'If you are signing up:', style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 25)),
+      new TextSpan(text: ' Then the username specified is not allowed OR your name is already taken \n',style: new TextStyle(fontSize: 25)),
+      new TextSpan(text: ' If you are logging in:', style: new TextStyle(fontWeight: FontWeight.bold,fontSize: 25)),
+      new TextSpan(text: ' Then you are using the wrong credentials'' \n',style: new TextStyle(fontSize: 25)),
+
+    ],),)
+
+
     );
   }
 }

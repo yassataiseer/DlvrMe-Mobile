@@ -4,6 +4,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'main.dart';
+import 'package:http_auth/http_auth.dart';
 
 class Order extends StatefulWidget{
   Order({this.Usrnme});
@@ -100,10 +101,11 @@ class _OrderPage extends State<Order>{
                   // ignore: deprecated_member_use
                   RaisedButton(
                     onPressed: () async{
+                      var client = BasicAuthClient('Yassa Taiseer', 'yassa123');
                       Address1 = Address.text;
                       var cityprov = CityProv.text;
                       Address1 = Address1+" "+cityprov;
-                      var status = await http.get("https://dlvrapi.pythonanywhere.com/validate_address/"+Address1);
+                      var status = await client.get("https://dlvrapi.pythonanywhere.com/Orders/validate_address/"+Address1);
                       var decodeStatus = json.decode((status.body));
                       if(decodeStatus["Status"]==true) {
                         double Price2 = 0;
@@ -111,15 +113,16 @@ class _OrderPage extends State<Order>{
                         Price1 = Price.text;
                         Price2 = double.parse(Price1);
                         Description1 = Description.text;
-                        var exist_address = await http.get("https://dlvrapi.pythonanywhere.com/find_address/"+Address1);
+                        var exist_address = await client.get("https://dlvrapi.pythonanywhere.com/Orders/find_address/"+Address1);
                         var decodedAnswer = json.decode((exist_address.body));
                         if(decodedAnswer["Status"]==false) {
-                          var url = 'https://dlvrapi.pythonanywhere.com/mk_order/' + Usrnme +
+                          var url = 'https://dlvrapi.pythonanywhere.com/Orders/mk_order/' + Usrnme +
                               "/" + Address1 + "/" + Item1 + "/" +
                               Price2.toString() + "/" + Description1;
                           print(url);
-                          var response = await http.get(url);
+                          var response = await client.get(url);
                           var x = json.decode((response.body));
+                          print(x);
                           Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) =>

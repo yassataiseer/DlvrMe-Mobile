@@ -9,6 +9,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:location/location.dart';
 import 'dart:math';
+import 'package:http_auth/http_auth.dart';
 
 import 'order_form.dart';
 
@@ -74,8 +75,9 @@ class _MapState extends State<Maps> {
   _MapState({this.Usrnme});
   final String Usrnme;
   Future<List<Welcome>> grab_stuff() async{
-    String data = 'https://dlvrapi.pythonanywhere.com/all_order';
-    var response = await http.get(data);
+    var client = BasicAuthClient('Yassa Taiseer', 'yassa123');
+    String data = 'https://dlvrapi.pythonanywhere.com/Orders/all_order';
+    var response = await client.get(data);
     if (response.statusCode == 200) {
       List FinalData = json.decode(response.body).cast<Map<String, dynamic>>();
       List<Welcome> usersList = FinalData.map<Welcome>((json) {
@@ -91,32 +93,15 @@ class _MapState extends State<Maps> {
   LatLng _center =  LatLng(45.521563, -122.677433);
   GoogleMapController mapController;
   Location _location = Location();
-  Future<List<user_data>> _getLocation() async {
-    var location = new Location();
-    try {
-      await location.getLocation().then((onValue) {
-        List data;
-        double lat = onValue.latitude.toDouble();
-        double lon = onValue.longitude.toDouble();
-        data[0] = lat;
-        data[1] = lon;
-        print(onValue.latitude.toDouble() + onValue.longitude.toDouble());
-        LatLng _center = LatLng(lat,lon);
-        List<user_data> realData = data.map<user_data>((realData){return user_data.fromDouble(realData);});
-        return realData.toList();
-        //return _center;
-      });
-    } catch (e) {
-      print(e);
-    }
-  }
+
   final Map<String, Marker> _markers = {};
   List Data = [];
   Future<void>  _onMapCreated(GoogleMapController controller) async{
     //mapController = controller;
-    String data = 'https://dlvrapi.pythonanywhere.com/all_order';
+    String data = 'https://dlvrapi.pythonanywhere.com/Orders/all_order';
     int increment = 0;
-    var response = await http.get(data);
+    var client = BasicAuthClient('Yassa Taiseer', 'yassa123');
+    var response = await client.get(data);
     if (response.statusCode == 200) {
       List FinalData = json.decode(response.body).cast<Map<String, dynamic>>();
       final List<Welcome> usersList = FinalData.map<Welcome>((json) {
