@@ -102,8 +102,15 @@ class LoginPage extends StatelessWidget{
               onPressed: () async {
                 nUsername = etUsername.text;
                 nPassword = etPassword.text;
-
-
+                print(nUsername);
+                if (nUsername==""||nPassword=="" ){
+                  showDialog(
+                    context: context,
+                    builder: (_){
+                      return AlertDialog(title: Text("Please fill out entire form"));
+                    },
+                  );
+                } else{
                 var url = 'https://dlvrapi.pythonanywhere.com/Users/validate_user/'+nUsername+"/"+nPassword;
                 var client = BasicAuthClient('Yassa Taiseer', 'yassa123');
                 var response = await client.get(url);
@@ -122,6 +129,7 @@ class LoginPage extends StatelessWidget{
                   Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => ErrorPage()));
+                }
                 }
               },
              child: Text('Login',
@@ -244,6 +252,15 @@ class SignUpPage extends StatelessWidget{
                   nPassword = etPassword.text;
                   nScndPassword = etScndPassword.text;
                   var client = BasicAuthClient('Yassa Taiseer', 'yassa123');
+                  if(nUsername==""||nPassword==""||nScndPassword==""){
+                    showDialog(
+                      context: context,
+                      builder: (_){
+                        return AlertDialog(title: Text("Please fill out entire form"));
+                      },
+                    );
+                  }
+
                   if (nScndPassword==nPassword){
                   var url = 'https://dlvrapi.pythonanywhere.com/Users/mk_user/'+nUsername+"/"+nPassword;
                   print(url);
@@ -256,9 +273,12 @@ class SignUpPage extends StatelessWidget{
                         MaterialPageRoute(builder: (context) => HomePage(Usrnme: Usrnme)));
                   }
                   else {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ErrorPage()));
+                    showDialog(
+                      context: context,
+                      builder: (_){
+                        return AlertDialog(title: Text("This username already exists"));
+                      },
+                    );
                   }
                   }
                   else{
