@@ -83,29 +83,44 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.amber[50],
 
         appBar: AppBar(
-          automaticallyImplyLeading: false,
-          leading:
-            Transform.rotate(
-              angle: 180 * 3.14 / 180,
-              child: IconButton(
-                icon: Icon(
-                  Icons.exit_to_app,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.push(
 
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()));},
-              ),
-            ),
 
         title: Text(Usrnme+"'s Orders"),
             backgroundColor: Color(0xff002366),
 
 
         ),
+      drawer: new Drawer(
 
+        child: new ListView(
+          children: <Widget>[
+            new DrawerHeader(
+
+              decoration: BoxDecoration(
+
+                color: Color(0xff002366),
+              ),
+
+              child: Text(
+                  'Settings',
+                  style: TextStyle(color:Colors.amber[50],fontSize: 25)
+              ),
+            ),
+
+            new ListTile(
+              leading: Icon(
+                Icons.exit_to_app,
+                color: Color(0xff002366),),
+              title: Text('Logout'),
+              onTap: (){
+                Navigator.push(
+
+                    context,
+                    MaterialPageRoute(builder: (context) => LoginPage()));},
+            ),
+          ],
+        ),
+      ),
       body: FutureBuilder<List<Welcome>>(
         future: grab_stuff(),
         builder: (context,snapshot){
