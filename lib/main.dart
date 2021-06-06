@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_auth/http_auth.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart' ;
+
+import 'package:http_auth/http_auth.dart';
+import 'package:flutter_config/flutter_config.dart';
 
 import 'home_widget.dart';
 
@@ -111,7 +115,9 @@ class LoginPage extends StatelessWidget{
                     },
                   );
                 } else{
-                var url = 'https://dlvrapi.pythonanywhere.com/Users/validate_user/'+nUsername+"/"+nPassword;
+                //await dotenv.load(fileName: ".env");
+                  print("--------");
+                var url =  'https://dlvrapi.pythonanywhere.com/Users/validate_user/'+nUsername+"/"+nPassword;
                 var client = BasicAuthClient('Yassa Taiseer', 'yassa123');
                 var response = await client.get(url);
                 var x = json.decode((response.body));
