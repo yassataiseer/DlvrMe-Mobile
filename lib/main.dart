@@ -11,11 +11,10 @@ import 'package:flutter_config/flutter_config.dart';
 
 import 'home_widget.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await FlutterConfig.loadEnvVariables();
   runApp(MyApp());
-  TextEditingController etUsername = new TextEditingController();
-  TextEditingController etPassword = new TextEditingController();
-  TextEditingController etScndPassword = new TextEditingController();
 }
 class MyApp extends StatelessWidget {
   @override
@@ -43,7 +42,7 @@ class LoginPage extends StatelessWidget{
       backgroundColor: Colors.amber[50],
       appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text("DlvrMe-Login"),
+          title: Text('DlvrMe-Login'),
           backgroundColor: Color(0xff002366)
       ),
       body: Center(
@@ -117,7 +116,7 @@ class LoginPage extends StatelessWidget{
                 } else{
                 //await dotenv.load(fileName: ".env");
                   print("--------");
-                var url =  'https://dlvrapi.pythonanywhere.com/Users/validate_user/'+nUsername+"/"+nPassword;
+                var url =  FlutterConfig.get('BACKEND_API')+'/Users/validate_user/'+nUsername+"/"+nPassword;
                 var client = BasicAuthClient('Yassa Taiseer', 'yassa123');
                 var response = await client.get(url);
                 var x = json.decode((response.body));
@@ -268,7 +267,7 @@ class SignUpPage extends StatelessWidget{
                   }
 
                   if (nScndPassword==nPassword){
-                  var url = 'https://dlvrapi.pythonanywhere.com/Users/mk_user/'+nUsername+"/"+nPassword;
+                  var url = FlutterConfig.get('BACKEND_API')+'/Users/mk_user/'+nUsername+"/"+nPassword;
                   print(url);
                   var response = await client.get(url);
                   var x = json.decode((response.body));

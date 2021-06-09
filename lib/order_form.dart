@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'main.dart';
 import 'package:http_auth/http_auth.dart';
+import 'package:flutter_config/flutter_config.dart';
 
 class Order extends StatefulWidget{
   Order({this.Usrnme});
@@ -113,7 +114,7 @@ class _OrderPage extends State<Order>{
                         Price1 = Price.text;
                         Price2 = double.parse(Price1);
                         Description1 = Description.text;
-                        var exist_address = await client.get("https://dlvrapi.pythonanywhere.com/Orders/find_address/"+Address1);
+                        var exist_address = await client.get(FlutterConfig.get('BACKEND_API')+"/Orders/find_address/"+Address1);
                         var decodedAnswer = json.decode((exist_address.body));
                         if(decodedAnswer["Status"]==false) {
                           var url = 'https://dlvrapi.pythonanywhere.com/Orders/mk_order/' + Usrnme +

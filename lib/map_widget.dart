@@ -10,6 +10,7 @@ import 'dart:convert';
 import 'package:location/location.dart';
 import 'dart:math';
 import 'package:http_auth/http_auth.dart';
+import 'package:flutter_config/flutter_config.dart';
 
 import 'order_form.dart';
 
@@ -76,7 +77,7 @@ class _MapState extends State<Maps> {
   final String Usrnme;
   Future<List<Welcome>> grab_stuff() async{
     var client = BasicAuthClient('Yassa Taiseer', 'yassa123');
-    String data = 'https://dlvrapi.pythonanywhere.com/Orders/all_order';
+    String data = FlutterConfig.get('BACKEND_API')+'Orders/all_order';
     var response = await client.get(data);
     if (response.statusCode == 200) {
       List FinalData = json.decode(response.body).cast<Map<String, dynamic>>();
@@ -98,7 +99,7 @@ class _MapState extends State<Maps> {
   List Data = [];
   Future<void>  _onMapCreated(GoogleMapController controller) async{
     //mapController = controller;
-    String data = 'https://dlvrapi.pythonanywhere.com/Orders/all_order';
+    String data = FlutterConfig.get('BACKEND_API')+'/Orders/all_order';
     int increment = 0;
     var client = BasicAuthClient('Yassa Taiseer', 'yassa123');
     var response = await client.get(data);

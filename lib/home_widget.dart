@@ -8,6 +8,7 @@ import 'dart:async';
 import 'main.dart';
 import 'order_form.dart';
 import 'dart:math' as math;
+import 'package:flutter_config/flutter_config.dart';
 
 
 class Home extends StatefulWidget {
@@ -159,7 +160,7 @@ class _HomeState extends State<Home> {
 
                 FlatButton(color:Colors.redAccent,child: Text("Delete"), onPressed: () async{
                   var client = BasicAuthClient('Yassa Taiseer', 'yassa123');
-                  var url = 'https://dlvrapi.pythonanywhere.com/Orders/del_order/'+user.name+"/"+user.address+"/"+user.item+"/"+user.price.toString()+"/"+user.description;
+                  var url =  FlutterConfig.get('BACKEND_API')+'Orders/del_order/'+user.name+"/"+user.address+"/"+user.item+"/"+user.price.toString()+"/"+user.description;
                   var response = await client.get(url);
                   var x = json.decode((response.body));
                   print(x);
