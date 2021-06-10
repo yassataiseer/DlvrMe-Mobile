@@ -25,9 +25,12 @@ Instructions regarding its setup can be found there
 
 ## Running the App
 Create an ```.env``` file in the main directory.
-
 Run your API instructions found [here](https://github.com/yassataiseer/DlvrMe-API).
+Make sure your api is not running on a port that is being used(the app automatically runs of Port 5000)
 
+```.env
+BACKEND_API=https://localhost:5000
+```
 
 
 ### Open Sourcing Opportunities
