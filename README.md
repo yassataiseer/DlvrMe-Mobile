@@ -8,20 +8,29 @@ DlvrMe-Mobile is a project made by Yassa Taiseer that is used to make delivering
   - Basically uber eats but anyone can deliver and make money
   - This is a cross platform project available to both mac and ios
   - The flutter app goes to a rest Api made with Python and Flask
-  - ```DlvrMe-Api```is the folder for the Api
 
-### Backend related affairs:
+
+## Backend related affairs:
 The backend code can be found here: https://github.com/yassataiseer/DlvrMe-API
 
 Instructions regarding its setup can be found there
 
 
-### Tech Stack:
+## Tech Stack:
 |Library/Framework| Purpose |
 | ------ | ------ |
 | Flask | Backend Api |
 | MySQL | Database |
 | Flutter| Frontend UI |
+
+## Running the App
+Create an ```.env``` file in the main directory.
+Run your API instructions found [here](https://github.com/yassataiseer/DlvrMe-API).
+Make sure your api is not running on a port that is being used(the app automatically runs of Port 5000)
+
+```.env
+BACKEND_API=https://localhost:5000
+```
 
 
 ### Open Sourcing Opportunities
@@ -30,4 +39,4 @@ Instructions will come soon regarding what needs
 to be improved.
 Things to be done can be viewed at  ```CONTRIBUTING.md``` but do notify what
 you will be doing before hand to prevent overwritten code.
-Current DlvrMe is not making new features rather improving current features.
+Currently DlvrMe is not making new features rather improving current features.
