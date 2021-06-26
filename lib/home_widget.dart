@@ -151,6 +151,7 @@ class _HomeState extends State<Home> {
                   "Address is:"+user.address+"\n"+"The item is: "+user.item+"\n"+"Price: \$"+user.price.toString()+"\n"+"Product info: "+user.description,
                   textAlign: TextAlign.justify,
                   style: TextStyle(
+
                     color: Color(0xff002366),
                   ),
                   overflow: TextOverflow.ellipsis,
@@ -160,7 +161,7 @@ class _HomeState extends State<Home> {
 
                 FlatButton(color:Colors.redAccent,child: Text("Delete"), onPressed: () async{
                   var client = BasicAuthClient('Yassa Taiseer', 'yassa123');
-                  var url =  FlutterConfig.get('BACKEND_API')+'Orders/del_order/'+user.name+"/"+user.address+"/"+user.item+"/"+user.price.toString()+"/"+user.description;
+                  var url =  FlutterConfig.get('BACKEND_API')+'/Orders/del_order/'+user.name+"/"+user.address+"/"+user.item+"/"+user.price.toString()+"/"+user.description;
                   var response = await client.get(url);
                   var x = json.decode((response.body));
                   print(x);
