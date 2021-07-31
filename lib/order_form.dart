@@ -108,6 +108,7 @@ class _OrderPage extends State<Order>{
                       Address1 = Address1+" "+cityprov;
                       var status = await client.get("https://dlvrapi.pythonanywhere.com/Orders/validate_address/"+Address1);
                       var decodeStatus = json.decode((status.body));
+                      print(decodeStatus);
                       if(decodeStatus["Status"]==true) {
                         double Price2 = 0;
                         Item1 = Item.text;
@@ -116,6 +117,7 @@ class _OrderPage extends State<Order>{
                         Description1 = Description.text;
                         var exist_address = await client.get(FlutterConfig.get('BACKEND_API')+"/Orders/find_address/"+Address1);
                         var decodedAnswer = json.decode((exist_address.body));
+                        print(decodedAnswer);
                         if(decodedAnswer["Status"]==false) {
                           var url = 'https://dlvrapi.pythonanywhere.com/Orders/mk_order/' + Usrnme +
                               "/" + Address1 + "/" + Item1 + "/" +

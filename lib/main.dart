@@ -45,17 +45,14 @@ class LoginPage extends StatelessWidget{
           title: Text('DlvrMe-Login'),
           backgroundColor: Color(0xff002366)
       ),
-      body: Center(
+      body: SingleChildScrollView(
 
 
     child: Column(
       children: [
-        new SvgPicture.asset(
-        'assets/images/NewLogo.svg',
-        semanticsLabel: 'DlvrMe Logo',
-          width: 600.0,
-          height: 240.0,
-        ),
+
+
+
         Center(child:Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
             child: Text('Login',
@@ -166,6 +163,7 @@ class LoginPage extends StatelessWidget{
             ))),
       ],
       ),
+
       ),
     );
   }
