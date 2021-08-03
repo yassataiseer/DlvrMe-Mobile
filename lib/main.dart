@@ -38,7 +38,6 @@ class LoginPage extends StatelessWidget{
     final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.amber[50],
       appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -48,10 +47,12 @@ class LoginPage extends StatelessWidget{
       body: SingleChildScrollView(
 
 
-    child: Column(
-      children: [
+    child:  Column(
+      children:  [
 
-
+        Center(child:Container(
+            padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+            child: Image.asset('assets/images/Latestlogo.png'))),
 
         Center(child:Container(
             padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
@@ -160,7 +161,7 @@ class LoginPage extends StatelessWidget{
               color:Colors.amber[50],
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
-            ))),
+            )))
       ],
       ),
 

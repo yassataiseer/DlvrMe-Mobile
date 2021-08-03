@@ -94,7 +94,7 @@ class _OrderPage extends State<Order>{
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         prefixIcon: Icon(Icons.info),
-                        labelText: 'Informating regarding product'),
+                        labelText: 'Information regarding product'),
                   ))),
               Center(child:Container(
                   padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
